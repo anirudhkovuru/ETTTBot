@@ -356,11 +356,11 @@ if __name__ == '__main__':
 	obj2 = ''
 	option = sys.argv[1]
 	if option == '1':
-		obj1 = bot.Team34()
-		obj2 = bot.Team34()
+		obj1 = bot.D4C()
+		obj2 = bot.D4C()
 
 	elif option == '2':
-		obj1 = bot.Team34()
+		obj1 = bot.D4C()
 		obj2 = Manual_Player()
 	elif option == '3':
 		obj1 = Manual_Player()

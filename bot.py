@@ -4,7 +4,7 @@ import copy
 import math
 import time
 
-class Team34:
+class D4C:
     def __init__(self):
         self.ply = 3
         self.num = 0
@@ -37,7 +37,7 @@ class Team34:
 
         dum_board = copy.deepcopy(board)
 
-        next_move = self.minimax(old_move, 0, True, -sys.maxint, sys.maxint, pflag, oflag, (-1, -1), dum_board)[1] 
+        next_move = self.minimax(old_move, 0, True, -sys.maxint, sys.maxint, pflag, oflag, (-1, -1), dum_board)[1]
 
         elapsed = (time.clock() - startt)
 
@@ -69,17 +69,17 @@ class Team34:
         if (bs[4*x+1][4*y] == bs[4*x][4*y+1] == bs[4*x+2][4*y+1] == bs[4*x+1][4*y+2]) and (bs[4*x+1][4*y] == pflag):
             temp_board.block_status[x][y] = pflag
             return temp_board
-            
+
         #diamond 2
         if (bs[4*x+1][4*y+1] == bs[4*x][4*y+2] == bs[4*x+2][4*y+2] == bs[4*x+1][4*y+3]) and (bs[4*x+1][4*y+1] == pflag):
             temp_board.block_status[x][y] = pflag
             return temp_board
-            
+
         #diamond 3
         if (bs[4*x+2][4*y] == bs[4*x+1][4*y+1] == bs[4*x+3][4*y+1] == bs[4*x+2][4*y+2]) and (bs[4*x+2][4*y] == pflag):
             temp_board.block_status[x][y] = pflag
             return temp_board
-            
+
         #diamond 4
         if (bs[4*x+2][4*y+1] == bs[4*x+1][4*y+2] == bs[4*x+3][4*y+2] == bs[4*x+2][4*y+3]) and (bs[4*x+2][4*y+1] == pflag):
             temp_board.block_status[x][y] = pflag
@@ -202,13 +202,13 @@ class Team34:
             cp += 1
         elif(blocks[0][1] == oflag):
             ce += 1
-            
+
         p += hvalues[2][1]
         if(blocks[2][1] == pflag):
             cp += 1
         elif(blocks[2][1] == oflag):
             ce += 1
-            
+
         p += hvalues[1][2]
         if(blocks[1][2] == pflag):
             cp += 1
@@ -235,13 +235,13 @@ class Team34:
             cp += 1
         elif(blocks[0][2] == oflag):
             ce += 1
-            
+
         p += hvalues[2][2]
         if(blocks[2][2] == pflag):
             cp += 1
         elif(blocks[2][2] == oflag):
             ce += 1
-            
+
         p += hvalues[1][3]
         if(blocks[1][3] == pflag):
             cp += 1
@@ -254,7 +254,7 @@ class Team34:
         p = 0
         cp = 0
         ce = 0
-            
+
         #diamond 3
 
         p += hvalues[2][0]
@@ -268,13 +268,13 @@ class Team34:
             cp += 1
         elif(blocks[1][1] == oflag):
             ce += 1
-            
+
         p += hvalues[3][1]
         if(blocks[3][1] == pflag):
             cp += 1
         elif(blocks[3][1] == oflag):
             ce += 1
-            
+
         p += hvalues[2][2]
         if(blocks[2][2] == pflag):
             cp += 1
@@ -287,7 +287,7 @@ class Team34:
         p = 0
         cp = 0
         ce = 0
-            
+
         #diamond 4
 
         p += hvalues[2][1]
@@ -301,7 +301,7 @@ class Team34:
             cp += 1
         elif(blocks[1][2] == oflag):
             ce += 1
-            
+
         p += hvalues[3][2]
         if(blocks[3][2] == pflag):
             cp += 1
@@ -399,15 +399,15 @@ class Team34:
             cd += 1
         else:
             ce += 1
-            
-        
+
+
         if(bs[4*x + 2][4*y + 1] == pflag):
             cp += 1
         elif(bs[4*x + 2][4*y + 1] == '-'):
             cd += 1
         else:
             ce += 1
-            
+
         if(bs[4*x + 1][4*y + 2] == pflag):
             cp += 1
         elif(bs[4*x + 1][4*y + 2] == '-'):
@@ -436,14 +436,14 @@ class Team34:
             cd += 1
         else:
             ce += 1
-            
+
         if(bs[4*x + 2][4*y + 2] == pflag):
             cp += 1
         elif(bs[4*x + 2][4*y + 2] == '-'):
             cd += 1
         else:
             ce += 1
-            
+
         if(bs[4*x + 1][4*y + 3] == pflag):
             cp += 1
         elif(bs[4*x + 1][4*y + 3] == '-'):
@@ -456,7 +456,7 @@ class Team34:
         cp = 0
         cd = 0
         ce = 0
-            
+
         #diamond 3
 
         if(bs[4*x + 2][4*y] == pflag):
@@ -472,14 +472,14 @@ class Team34:
             cd += 1
         else:
             ce += 1
-            
+
         if(bs[4*x + 3][4*y + 1] == pflag):
             cp += 1
         elif(bs[4*x + 3][4*y + 1] == '-'):
             cd += 1
         else:
             ce += 1
-            
+
         if(bs[4*x + 2][4*y + 2] == pflag):
             cp += 1
         elif(bs[4*x + 2][4*y + 2] == '-'):
@@ -492,7 +492,7 @@ class Team34:
         cp = 0
         cd = 0
         ce = 0
-            
+
         #diamond 4
 
         if(bs[4*x + 2][4*y + 1] == pflag):
@@ -508,7 +508,7 @@ class Team34:
             cd += 1
         else:
             ce += 1
-            
+
         if(bs[4*x + 3][4*y + 2] == pflag):
             cp += 1
         elif(bs[4*x + 3][4*y + 2] == '-'):
