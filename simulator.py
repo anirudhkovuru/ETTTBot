@@ -4,9 +4,7 @@ import signal
 import time
 import copy
 import traceback
-import team34
 import bot
-import Team35
 
 TIME = 16
 MAX_PTS = 68
@@ -32,7 +30,7 @@ class Manual_Player:
 	def __init__(self):
 		pass
 	def move(self, board, old_move, flag):
-		print 'Enter your move: <format:row column> (you\'re playing with', flag + ")"	
+		print 'Enter your move: <format:row column> (you\'re playing with', flag + ")"
 		mvp = raw_input()
 		mvp = mvp.split()
 		return (int(mvp[0]), int(mvp[1]))
@@ -55,14 +53,14 @@ class Board:
 				if j%4 == 0:
 					print "",
 				print self.board_status[i][j],
-			print 
+			print
 		print
 
 		print '==============Block State=============='
 		for i in range(4):
 			for j in range(4):
 				print self.block_status[i][j],
-			print 
+			print
 		print '======================================='
 		print
 		print
@@ -84,7 +82,7 @@ class Board:
 				for j in range(16):
 					if self.board_status[i][j] == '-' and self.block_status[i/4][j/4] == '-':
 						allowed_cells.append((i,j))
-		return allowed_cells	
+		return allowed_cells
 
 	def find_terminal_state(self):
 		#checks if the game is over(won or drawn) and returns the player who have won the game or the player who has higher blocks in case of a draw
@@ -104,11 +102,11 @@ class Board:
 					cntd += 1
 
 		for i in range(4):
-			row = bs[i]							#i'th row 
+			row = bs[i]							#i'th row
 			col = [x[i] for x in bs]			#i'th column
 			#print row,col
 			#checking if i'th row or i'th column has been won or not
-			if (row[0] =='x' or row[0] == 'o') and (row.count(row[0]) == 4):	
+			if (row[0] =='x' or row[0] == 'o') and (row.count(row[0]) == 4):
 				return (row[0],'WON')
 			if (col[0] =='x' or col[0] == 'o') and (col.count(col[0]) == 4):
 				return (col[0],'WON')
@@ -131,7 +129,7 @@ class Board:
 	def check_valid_move(self, old_move, new_move):
 		#checks if a move is valid or not given the last move
 		if (len(old_move) != 2) or (len(new_move) != 2):
-			return False 
+			return False
 		if (type(old_move[0]) is not int) or (type(old_move[1]) is not int) or (type(new_move[0]) is not int) or (type(new_move[1]) is not int):
 			return False
 		if (old_move != (-1,-1)) and (old_move[0] < 0 or old_move[0] > 16 or old_move[1] < 0 or old_move[1] > 16):
@@ -197,7 +195,7 @@ def player_turn(game_board, old_move, obj, ply, opp, flg):
 		to_break = False
 		p_move = ''
 
-		try:									#try to get player 1's move			
+		try:									#try to get player 1's move
 			p_move = obj.move(game_board, old_move, flg)
 		except TimedOutExc:					#timeout error
 #			print e
@@ -209,7 +207,7 @@ def player_turn(game_board, old_move, obj, ply, opp, flg):
 			WINNER = opp
 			MESSAGE = "THREW AN EXCEPTION"
 			traceback.print_exc()
-			pts[opp] = MAX_PTS			
+			pts[opp] = MAX_PTS
 			return p_move, WINNER, MESSAGE, pts["P1"], pts["P2"], True, False
 		signal.alarm(0)
 
@@ -248,7 +246,7 @@ def gameplay(obj1, obj2):				#game simulator
 	fl2 = 'o'
 	old_move = (-1,-1)
 	WINNER = ''
-	MESSAGE = ''	
+	MESSAGE = ''
 	pts1 = 0
 	pts2 = 0
 
@@ -266,12 +264,12 @@ def gameplay(obj1, obj2):				#game simulator
 
 		if block_won:
 			p1_move, WINNER, MESSAGE, pts1, pts2, to_break, block_won = player_turn(game_board, old_move, obj1, "P1", "P2", fl1)
-		
+
 			if to_break:
 				break
-		
+
 			old_move = p1_move
-			game_board.print_board()			
+			game_board.print_board()
 
 		#do the same thing for player 2
 		p2_move, WINNER, MESSAGE, pts1, pts2, to_break, block_won = player_turn(game_board, old_move, obj2, "P2", "P1", fl2)
@@ -284,12 +282,12 @@ def gameplay(obj1, obj2):				#game simulator
 
 		if block_won:
 			p2_move, WINNER, MESSAGE, pts1, pts2, to_break, block_won = player_turn(game_board, old_move, obj2, "P2", "P1", fl2)
-		
+
 			if to_break:
 				break
-		
+
 			old_move = p2_move
-			game_board.print_board()		
+			game_board.print_board()
 
 	game_board.print_board()
 
@@ -353,16 +351,16 @@ if __name__ == '__main__':
 		print '                2 => Human vs. Random Player'
 		print '                3 => Human vs. Human'
 		sys.exit(1)
- 
+
 	obj1 = ''
 	obj2 = ''
-	option = sys.argv[1]	
+	option = sys.argv[1]
 	if option == '1':
-		obj1 = bot.TMW() 
-		obj2 = Team35.Team35() 
+		obj1 = bot.Team34()
+		obj2 = bot.Team34()
 
 	elif option == '2':
-		obj1 = Random_Player()
+		obj1 = bot.Team34()
 		obj2 = Manual_Player()
 	elif option == '3':
 		obj1 = Manual_Player()
@@ -372,5 +370,5 @@ if __name__ == '__main__':
 		sys.exit(1)
 
 	x = gameplay(obj1, obj2)
-	print "Player 1 points:", x[0] 
+	print "Player 1 points:", x[0]
 	print "Player 2 points:", x[1]
